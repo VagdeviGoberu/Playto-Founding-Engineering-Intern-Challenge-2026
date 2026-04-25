@@ -1,0 +1,22 @@
+class KYCSubmission(models.Model):
+    STATUS_CHOICES = [
+        ("draft", "draft"),
+        ("submitted", "submitted"),
+        ("under_review", "under_review"),
+        ("approved", "approved"),
+        ("rejected", "rejected"),
+        ("more_info_requested", "more_info_requested"),
+    ]
+
+    merchant = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES, default="draft")
+
+    personal_details = models.JSONField(null=True, blank=True)
+    business_details = models.JSONField(null=True, blank=True)
+
+    pan_file = models.FileField(upload_to="kyc/")
+    aadhaar_file = models.FileField(upload_to="kyc/")
+    bank_statement = models.FileField(upload_to="kyc/")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
