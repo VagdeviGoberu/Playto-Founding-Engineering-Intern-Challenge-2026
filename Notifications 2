@@ -1,0 +1,5 @@
+Notification.objects.create(
+    merchant=instance.merchant,
+    event_type="status_changed",
+    payload={"new_status": to_state}
+)
