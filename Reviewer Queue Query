@@ -1,0 +1,8 @@
+from django.utils.timezone import now
+from datetime import timedelta
+
+queryset = KYCSubmission.objects.filter(
+    status__in=["submitted", "under_review"]
+).annotate(
+    time_in_queue=now() - F("created_at"),
+).order_by("created_at")
