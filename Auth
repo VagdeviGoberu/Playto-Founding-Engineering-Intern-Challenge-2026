@@ -1,0 +1,9 @@
+class IsMerchantOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.merchant == request.user
+
+
+def get_queryset(self):
+    if self.request.user.role == "reviewer":
+        return KYCSubmission.objects.all()
+    return KYCSubmission.objects.filter(merchant=self.request.user)
