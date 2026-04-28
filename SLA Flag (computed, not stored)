@@ -1,0 +1,4 @@
+from datetime import timedelta
+
+def is_at_risk(submission):
+    return (now() - submission.created_at) > timedelta(hours=24)
