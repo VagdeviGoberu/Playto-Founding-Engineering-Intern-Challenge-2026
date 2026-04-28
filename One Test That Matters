@@ -1,0 +1,5 @@
+def test_illegal_transition():
+    submission = KYCSubmission.objects.create(status="approved")
+
+    with pytest.raises(ValidationError):
+        KYCStateMachine.transition(submission, "draft")
